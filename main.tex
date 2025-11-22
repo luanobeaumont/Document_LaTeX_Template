@@ -1,0 +1,154 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- FONT SETTINGS (Arial/Helvetica) ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{helvet} 
+\renewcommand{\familydefault}{\sfdefault} 
+% ---------------------------------------
+
+% --- PACKAGES ---
+\usepackage{graphicx}               
+\usepackage[a4paper, margin=1in]{geometry}   
+\usepackage{tikz}                   
+\usepackage{listings}               
+\usepackage[table]{xcolor}          
+\usepackage{booktabs}               
+\usepackage{subcaption}             
+\usepackage{caption}                
+\usepackage{needspace}              
+\usepackage{float}                  
+\usepackage[skip=10pt]{caption}     
+\usepackage{fancyhdr}               
+\usepackage{datetime}               
+\usepackage{lipsum}                 
+\usepackage{changepage}             
+\usepackage[shortlabels]{enumitem}  
+\usepackage{titletoc}               
+\usetikzlibrary{calc}               
+
+\setlength{\parindent}{0pt}         
+
+% ==========================================
+%      IMPORT PROJECT DETAILS (VARIABLES)
+% ==========================================
+\input{details}
+% ==========================================
+
+% --- COLOR DEFINITIONS ---
+\definecolor{codebg}{RGB}{240,240,240}          
+\definecolor{codegreen}{rgb}{0,0.5,0}      
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}   
+\definecolor{framecolor}{rgb}{0.8,0.8,0.8} 
+\definecolor{gray}{RGB}{30, 30, 30}
+
+% --- INTERACTIVITY (HYPERREF) ---
+% NOTE: This must be loaded LAST to work correctly.
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,      % false: boxed links; true: colored links
+    linkcolor=gray,       % Color of internal links (ToC, figures, etc.)
+    citecolor=gray,       % Color of citations
+    filecolor=gray,       % Color of file links
+    urlcolor=blue,        % Color of external URLs
+    pdftitle={\docHeaderTitle},  % Metadata: Title
+    pdfauthor={\authorName}      % Metadata: Author
+}
+
+% --- DATE FORMAT SETUP ---
+\newdateformat{daymonyearformat}{\THEDAY\ \monthname[\THEMONTH] \THEYEAR}
+\newdateformat{mondayyearformat}{\monthname[\THEMONTH] \THEDAY, \THEYEAR}
+
+% --- LISTINGS STYLES ---
+\lstdefinestyle{mystyle}{
+    language=R,
+    backgroundcolor=\color{codebg},   
+    basicstyle=\footnotesize\sffamily, 
+    breakatwhitespace=false,         
+    breaklines=true,               
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=none,                    
+    numbersep=5pt,                  
+    showspaces=false,                 
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    xleftmargin=15pt,
+    framexleftmargin=15pt,
+    frame=single,                    
+    rulesepcolor=\color{framecolor}, 
+    framerule=1pt,                   
+    commentstyle=\color{codegray},   
+    stringstyle=\color{codegreen},       
+    otherkeywords={TRUE,FALSE,NA,Inf,NaN,NULL}
+}
+
+% --- CAPTION SETUP ---
+\DeclareCaptionFormat{mycustomformat}{%
+    \parbox{\linewidth}{
+        \textbf{\MakeUppercase{\figurename}~\thefigure}\par%
+        \vspace{0.5ex}      
+        \small#3%
+    }%
+}
+
+\DeclareCaptionStyle{mycustom}{
+    format=mycustomformat,
+    font=small,
+    labelfont=bf,
+    justification=raggedright,
+    singlelinecheck=false
+}
+
+% --- HEADER AND FOOTER SETUP ---
+\fancypagestyle{mainpages}{
+    \fancyhf{}                      
+    % HEADER
+    \fancyhead[L]{\small\textcolor{gray}{\docID \ | \ \docHeaderTitle}} 
+    
+    % FOOTER
+    \fancyfoot[L]{\small\textcolor{gray}{\daymonyearformat\today}}   
+    \fancyfoot[R]{\small\thepage}                                    
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% --- TABLE OF CONTENTS CUSTOMIZATION ---
+\titlecontents{section}[2.3em]
+  {}
+  {\bfseries\contentslabel[\thecontentslabel.0]{2em}\MakeUppercase} 
+  {\hspace*{-2.3em}\bfseries\MakeUppercase}
+  {\titlerule*[0.3pc]{.}\contentspage}  
+
+\titlecontents{subsection}[4.6em] 
+  {}
+  {\bfseries\contentslabel{2em}}
+  {\hspace*{-2.3em}\bfseries}
+  {\titlerule*[0.3pc]{.}\contentspage}
+
+\titlecontents{subsubsection}[6.9em]
+  {}
+  {\bfseries\contentslabel{2em}\itshape\space}
+  {\hspace*{-2.3em}\bfseries}
+  {\titlerule*[0.3pc]{.}\contentspage}
+
+\makeatletter
+\renewcommand\tableofcontents{%
+  \section*{\centerline{\MakeUppercase{\contentsname}}
+    \@mkboth
+      {\MakeUppercase\contentsname}
+      {\MakeUppercase\contentsname}
+  }%
+  \@starttoc{toc}%
+}
+\makeatother
+
+% --- OVERRIDES ---
+\renewcommand{\lstlistingname}{Code block} 
+\lstset{style=mystyle} 
+
+\begin{document}
+\input{titlepage}   
+\include{content}    
+\end{document}
