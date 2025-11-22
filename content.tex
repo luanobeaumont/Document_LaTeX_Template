@@ -1,50 +1,30 @@
-\tableofcontents
-\clearpage
-
-% --- FRONT MATTER ---
-\pagenumbering{roman}
-
-% 1. List of Tables
-\section*{Tables}
-\addcontentsline{toc}{section}{Tables}
-\listoftables
-\clearpage
-
-% 2. List of Figures
-\section*{Figures}
-\addcontentsline{toc}{section}{Figures}
-\listoffigures
-\clearpage
-
-% --- MAIN MATTER ---
-\pagenumbering{arabic}
-\pagestyle{mainpages}
+% ==========================================
+%              MAIN CONTENT
+% ==========================================
 
 \section{Word-Like Formatting Features}
 
 \subsection{Text Styling}
 LaTeX makes basic text formatting simple:
 \begin{itemize}
-    \item \textbf{This text is Bold} (Command: \texttt{\textbackslash textbf\{...\}})
-    \item \textit{This text is Italic} (Command: \texttt{\textbackslash textit\{...\}})
+    \item \textbf{This text is Bold} 
+    \item \textit{This text is Italic} 
     \item \textbf{\textit{This text is Bold and Italic}} 
-    \item \underline{This text is Underlined} (Command: \texttt{\textbackslash underline\{...\}})
+    \item \underline{This text is Underlined} 
 \end{itemize}
 
 \subsection{Text Sizes}
-You can change the font size relative to the document default (11pt). Note that these commands affect all text following them until you close the group (curly braces).
-
 \begin{itemize}
-    \item {\tiny This is tiny text} \hfill (\texttt{\textbackslash tiny})
-    \item {\scriptsize This is scriptsize text} \hfill (\texttt{\textbackslash scriptsize})
-    \item {\footnotesize This is footnotesize text} \hfill (\texttt{\textbackslash footnotesize})
-    \item {\small This is small text} \hfill (\texttt{\textbackslash small})
-    \item {\normalsize This is normalsize text (Default)} \hfill (\texttt{\textbackslash normalsize})
-    \item {\large This is large text} \hfill (\texttt{\textbackslash large})
-    \item {\Large This is Large text} \hfill (\texttt{\textbackslash Large})
-    \item {\LARGE This is LARGE text} \hfill (\texttt{\textbackslash LARGE})
-    \item {\huge This is huge text} \hfill (\texttt{\textbackslash huge})
-    \item {\Huge This is Huge text} \hfill (\texttt{\textbackslash Huge})
+    \item {\tiny This is tiny text} 
+    \item {\scriptsize This is scriptsize text} 
+    \item {\footnotesize This is footnotesize text} 
+    \item {\small This is small text} 
+    \item {\normalsize This is normalsize text (Default)} 
+    \item {\large This is large text} 
+    \item {\Large This is Large text} 
+    \item {\LARGE This is LARGE text} 
+    \item {\huge This is huge text} 
+    \item {\Huge This is Huge text} 
 \end{itemize}
 
 \clearpage
@@ -125,17 +105,14 @@ You can change the font size relative to the document default (11pt). Note that 
   \begin{center}
       \rule{\textwidth}{0.8pt}  
   \end{center}
-  
   \captionsetup{style=mycustom} 
   \caption{Extended detail overview of the figure shown below...}
   \label{fig:custom_example}
-  
   \begin{center}
       % Uncomment to use your file:
       % \includegraphics[width=0.8\textwidth]{resources/2_bLine_regressplot.png}
       \includegraphics[width=0.8\textwidth]{example-image}
   \end{center}
-
   \vspace{1mm} 
   {\footnotesize\textcolor{gray}{\textit{Source: --Source of the Graph--}}}
 \end{figure}

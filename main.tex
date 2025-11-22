@@ -40,24 +40,22 @@
 \definecolor{codegreen}{rgb}{0,0.5,0}      
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}   
 \definecolor{framecolor}{rgb}{0.8,0.8,0.8} 
-\definecolor{gray}{RGB}{30, 30, 30}
+\definecolor{gray}{RGB}{30, 30, 30} % Dark Gray
 
 % --- INTERACTIVITY (HYPERREF) ---
-% NOTE: This must be loaded LAST to work correctly.
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=true,      % false: boxed links; true: colored links
-    linkcolor=gray,       % Color of internal links (ToC, figures, etc.)
-    citecolor=gray,       % Color of citations
-    filecolor=gray,       % Color of file links
-    urlcolor=blue,        % Color of external URLs
-    pdftitle={\docHeaderTitle},  % Metadata: Title
-    pdfauthor={\authorName}      % Metadata: Author
+    colorlinks=true,      
+    linkcolor=gray,       
+    citecolor=gray,       
+    filecolor=gray,       
+    urlcolor=blue,        
+    pdftitle={\docHeaderTitle},  
+    pdfauthor={\authorName}      
 }
 
 % --- DATE FORMAT SETUP ---
 \newdateformat{daymonyearformat}{\THEDAY\ \monthname[\THEMONTH] \THEYEAR}
-\newdateformat{mondayyearformat}{\monthname[\THEMONTH] \THEDAY, \THEYEAR}
 
 % --- LISTINGS STYLES ---
 \lstdefinestyle{mystyle}{
@@ -104,10 +102,7 @@
 % --- HEADER AND FOOTER SETUP ---
 \fancypagestyle{mainpages}{
     \fancyhf{}                      
-    % HEADER
     \fancyhead[L]{\small\textcolor{gray}{\docID \ | \ \docHeaderTitle}} 
-    
-    % FOOTER
     \fancyfoot[L]{\small\textcolor{gray}{\daymonyearformat\today}}   
     \fancyfoot[R]{\small\thepage}                                    
     \renewcommand{\headrulewidth}{0pt}
@@ -149,6 +144,34 @@
 \lstset{style=mystyle} 
 
 \begin{document}
+% 1. Title Page
 \input{titlepage}   
+
+% 2. Front Matter (Lists) - Numbering: i, ii, iii
+\pagenumbering{roman}
+
+\ifShowTOC
+    \tableofcontents
+    \clearpage
+\fi
+
+\ifShowLOT
+    % Manually add to TOC because \listoftables doesn't do it automatically
+    \addcontentsline{toc}{section}{Tables}
+    \listoftables
+    \clearpage
+\fi
+
+\ifShowLOF
+    \addcontentsline{toc}{section}{Figures}
+    \listoffigures
+    \clearpage
+\fi
+
+% 3. Main Content - Numbering: 1, 2, 3
+\pagenumbering{arabic}
+\pagestyle{mainpages} % Activates the custom headers/footers
+
 \include{content}    
+
 \end{document}

@@ -10,17 +10,25 @@
 % Use \\ to force a new line for the Cover Page.
 \newcommand{\docTitle}{Collection of \LaTeX\ Sections \\ for Structured Academic and \\ Technical Report Documents}
 
-% NEW: Short Title for the Header (Must be ONE line, no \\)
+% 3. Header Short Title (Must be ONE line)
 \newcommand{\docHeaderTitle}{Collection of \LaTeX\ Sections}
 
-% 3. Subtitle
+% 4. Subtitle
 \newcommand{\docSubtitle}{A Template Collection}
 
-% 4. Author (Prepared By)
+% 5. Author (Prepared By)
 \newcommand{\authorName}{Woodrow "Wooderson" Fajardo}
 
-% 5. Target (Submitted To)
+% 6. Target (Submitted To)
 \newcommand{\recipientName}{[Instructor / Supervisor Name]}
 
-% 6. Document ID (Code)
+% 7. Document ID (Code)
 \newcommand{\docID}{BLK1-FRGMT-001}
+
+% ==========================================
+%           DISPLAY SETTINGS
+% ==========================================
+% Change \true to \false to hide the section
+\newif\ifShowTOC   \ShowTOCtrue   % Table of Contents
+\newif\ifShowLOT   \ShowLOTtrue   % List of Tables
+\newif\ifShowLOF   \ShowLOFtrue   % List of Figures
