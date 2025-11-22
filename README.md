@@ -10,7 +10,7 @@ Only modify the `details.tex` to modify the document title and it will automatic
 
 Prefer to use `pdflatex` since I made this template in the pdflatex environment.
 
-Follow this steps to generate pdf output:
+Follow these steps to generate pdf output:
 
 - Check if on the correct working directory (Where the main.tex files are located).
 
