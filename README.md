@@ -1,22 +1,23 @@
-## Academic Doceument LaTeX Template
+## Academic Document LaTeX Template
 
 A LaTeX template for creating academic purposes documents or more.
 
-## Title Credentials
+## Title Page Formatting
 
-Only modify the `details.tex` to modify the document title and it will automatically create the title page for you. This is done to avoid sloppy errors.
+Only modify the `details.tex` file to modify the document title and its contents. It will automatically create the title page for you. This is done to avoid sloppy errors.
 
-## How to compile
+## How to compile (Linux)
 
-Prefer to use `pdflatex` since I made this template in the pdflatex environment.
+Prefer use of `pdflatex` since I made this template in the pdflatex environment.
 
-Follow this steps to generate pdf output:
+Follow these steps to generate a pdf output:
 
 - Check if on the correct working directory (Where the main.tex files are located).
 
 ```bash
 pwd
 ```
+*MacOS, Windows, and Linux use the same command*
 
 - Run this pdflatex recipe pdflatex->pdflatex->pdflatex (Run 3 times).
 
