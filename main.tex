@@ -1,21 +1,22 @@
 \documentclass[11pt, a4paper]{article}
 
-% --- FONT SETTINGS (Arial/Helvetica) ---
-\usepackage[utf8]{inputenc}
+% --- FONT SETTINGS ---
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{helvet} 
 \renewcommand{\familydefault}{\sfdefault} 
-% ---------------------------------------
 
 % --- PACKAGES ---
 \usepackage{graphicx}               
 \usepackage[a4paper, margin=1in]{geometry}   
 \usepackage{tikz}                   
-\usepackage{listings}               
-% REMOVED [table] option to prevent conflict with nicematrix
 \usepackage{xcolor}          
-\usepackage{nicematrix} % <--- Fixes table rendering on Linux
-\usepackage{tcolorbox}  % <--- Creates rounded inline code
+\usepackage{nicematrix} 
+\usepackage{fancyvrb} % Required for the safe file writing
+
+% --- TCOLORBOX SETUP ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, minted, breakable}
+
 \usepackage{booktabs}               
 \usepackage{subcaption}             
 \usepackage{caption}                
@@ -33,59 +34,31 @@
 \setlength{\parindent}{0pt}         
 
 % ==========================================
-%      IMPORT PROJECT DETAILS (VARIABLES)
+%      IMPORT PROJECT DETAILS
 % ==========================================
 \input{details}
 % ==========================================
 
 % --- COLOR DEFINITIONS ---
-\definecolor{codebg}{RGB}{250, 245, 230}       % Aged Paper   
-\definecolor{codegreen}{rgb}{0,0.5,0}      
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}   
-\definecolor{framecolor}{rgb}{0.8,0.8,0.8} 
-% FIX: Changed rgb to RGB (30 is invalid for lowercase rgb)
-\definecolor{gray}{RGB}{30, 30, 30} 
-\definecolor{inlinecodebg}{RGB}{240, 230, 200} % Darker Manila
+\definecolor{codebg}{RGB}{250, 245, 230}       
+\definecolor{docgray}{RGB}{30, 30, 30} 
+\definecolor{inlinecodebg}{RGB}{240, 230, 200} 
+\definecolor{framecolor}{rgb}{0.8,0.8,0.8}
 
-% --- INTERACTIVITY (HYPERREF) ---
+% --- INTERACTIVITY ---
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,      
-    linkcolor=gray,       
-    citecolor=gray,       
-    filecolor=gray,       
+    linkcolor=docgray,       
+    citecolor=docgray,       
+    filecolor=docgray,       
     urlcolor=blue,        
     pdftitle={\docHeaderTitle},  
     pdfauthor={\authorName}      
 }
 
-% --- DATE FORMAT SETUP ---
+% --- DATE FORMAT ---
 \newdateformat{daymonyearformat}{\THEDAY\ \monthname[\THEMONTH] \THEYEAR}
-
-% --- LISTINGS STYLES ---
-\lstdefinestyle{mystyle}{
-    language=R,
-    backgroundcolor=\color{codebg},   
-    basicstyle=\footnotesize\sffamily, 
-    breakatwhitespace=false,         
-    breaklines=true,               
-    captionpos=b,                    
-    keepspaces=true,                 
-    numbers=none,                    
-    numbersep=5pt,                  
-    showspaces=false,                 
-    showstringspaces=false,
-    showtabs=false,                  
-    tabsize=2,
-    xleftmargin=15pt,
-    framexleftmargin=15pt,
-    frame=single,                    
-    rulesepcolor=\color{framecolor}, 
-    framerule=1pt,                   
-    commentstyle=\color{codegray},   
-    stringstyle=\color{codegreen},       
-    otherkeywords={TRUE,FALSE,NA,Inf,NaN,NULL}
-}
 
 % --- CAPTION SETUP ---
 \DeclareCaptionFormat{mycustomformat}{%
@@ -95,7 +68,6 @@
         \small#3%
     }%
 }
-
 \DeclareCaptionStyle{mycustom}{
     format=mycustomformat,
     font=small,
@@ -104,33 +76,72 @@
     singlelinecheck=false
 }
 
-% --- CUSTOM INLINE COMMAND (CORRECTED) ---
+% --- INLINE CODE ---
 \newtcbox{\inlinecode}{
-  on line,           % Keeps the box on the same line as text
-  arc=3pt,           % Rounded corners
+  on line,
+  arc=3pt,
   colback=inlinecodebg, 
   colframe=inlinecodebg, 
-  boxrule=0pt,       % No thick border line
-  boxsep=0pt,        % Minimize internal spacing
-  left=3pt,          % Left padding
-  right=3pt,         % Right padding
-  top=2pt,           % Top padding (prevents text from hitting the ceiling)
-  bottom=1pt,        % Bottom padding
-  fontupper=\ttfamily % Sets the font to typewriter style
+  boxrule=0pt,
+  boxsep=0pt,
+  left=3pt, right=3pt, top=2pt, bottom=1pt,
+  fontupper=\ttfamily
 }
 
-% --- HEADER AND FOOTER SETUP ---
+% --- CIA DOSSIER CODE STYLE (UPDATED EXTENSION) ---
+\newenvironment{ciacode}[2]{%
+   \def\cialang{#1}%
+   \def\ciatitle{#2}%
+   \VerbatimEnvironment
+   % CHANGED: Now writes to .codeblk instead of .cia
+   \begin{VerbatimOut}{\jobname.codeblk}%
+}{%
+   \end{VerbatimOut}%
+   \tcbinputlisting{
+      listing engine=minted,
+      listing only,
+      minted language=\cialang,
+      % CHANGED: Now reads from .codeblk
+      listing file={\jobname.codeblk}, 
+      minted options={
+          fontsize=\small, 
+          breaklines, 
+          autogobble,
+          linenos,
+          numbersep=3mm
+      },
+      enhanced,
+      skin=enhancedlast,     
+      arc=1pt,
+      boxrule=0.5pt,
+      colframe=docgray,
+      colback=codebg,
+      width=\linewidth,
+      title={\small\ttfamily\textbf{\cialang} // \textbf{\ciatitle}},
+      coltitle=black,
+      attach boxed title to top left={xshift=3mm, yshift=-3mm},
+      boxed title style={
+          colback=codebg,
+          colframe=docgray,
+          arc=1pt,
+          boxrule=0.5pt,
+          bottom=1mm
+      },
+      drop shadow southeast
+   }
+}
+
+% --- HEADER AND FOOTER ---
 \fancypagestyle{mainpages}{
     \fancyhf{}                      
-    \fancyhead[L]{\small\textcolor{gray}{\docID \ | \ \docHeaderTitle}} 
-    \fancyfoot[L]{\small\textcolor{gray}{\daymonyearformat\today}}   
+    \fancyhead[L]{\small\textcolor{docgray}{\docID \ | \ \docHeaderTitle}} 
+    \fancyfoot[L]{\small\textcolor{docgray}{\daymonyearformat\today}}   
     \fancyfoot[R]{\small\thepage}                                    
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
 }
 
-% --- TABLE OF CONTENTS / LISTS CUSTOMIZATION (FIXED) ---
-% 1. Standardize Headers
+% --- TOC/LISTS CUSTOMIZATION ---
 \makeatletter
 \renewcommand\tableofcontents{%
   \section*{\contentsname}
@@ -146,8 +157,6 @@
 }
 \makeatother
 
-% 2. SECTION Styles (TOC)
-% Removed \MakeUppercase to fix the "invisible text" bug
 \titlecontents{section}[2.3em]
   {\addvspace{1em}}                   
   {\bfseries\contentslabel{2em}}      
@@ -166,31 +175,16 @@
   {\hspace*{-3em}}
   {\titlerule*[0.3pc]{.}\contentspage}
 
-% 3. FIGURE List Styles (LOF)
 \titlecontents{figure}[2.5em]
-  {} 
-  {\contentslabel{2.5em}}             
-  {\hspace*{-2.5em}}
-  {\titlerule*[0.3pc]{.}\contentspage}
+  {}{\contentslabel{2.5em}}{\hspace*{-2.5em}}{\titlerule*[0.3pc]{.}\contentspage}
 
-% 4. TABLE List Styles (LOT)
 \titlecontents{table}[2.5em]
-  {}
-  {\contentslabel{2.5em}}             
-  {\hspace*{-2.5em}}
-  {\titlerule*[0.3pc]{.}\contentspage}
-
-% --- OVERRIDES ---
-\renewcommand{\lstlistingname}{Code block} 
-\lstset{style=mystyle} 
+  {}{\contentslabel{2.5em}}{\hspace*{-2.5em}}{\titlerule*[0.3pc]{.}\contentspage}
 
 \pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
 
 \begin{document}
-% 1. Title Page
 \input{titlepage}   
-
-% 2. Front Matter (Lists) - Numbering: i, ii, iii
 \pagenumbering{roman}
 
 \ifShowTOC
@@ -199,7 +193,6 @@
 \fi
 
 \ifShowLOT
-    % Now automatically styled correctly by the customization block above
     \addcontentsline{toc}{section}{Tables}
     \listoftables
     \clearpage
@@ -211,9 +204,8 @@
     \clearpage
 \fi
 
-% 3. Main Content - Numbering: 1, 2, 3
 \pagenumbering{arabic}
-\pagestyle{mainpages} % Activates the custom headers/footers
+\pagestyle{mainpages} 
 
 \include{content}    
 

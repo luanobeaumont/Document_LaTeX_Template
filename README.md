@@ -10,9 +10,28 @@ Only modify the `details.tex` file to modify the document title and its contents
 
 > We use LuaLaTeX as the main latex compiler to address the color rendering issue persistent in multiple pdf viewers in Windows/Linux. 
 
-### Linux Debian
+### Install Minted/Python-pygments
+
+Linux Debian/Ubuntu Install:
+
+```bash
+sudo apt update
+sudo apt install python3-pygments
+```
+
+Verify if working.
+
+```bash
+pygmentize -V
+```
+
+### LuaLaTeX Installation
+
+> We will use minted to address tcolorbox issues with codeblocks rendering.
 
 Installation & Compiling LuaLaTeX compiler:
+
+Linux Debian/Ubuntu Install:
 
 ```bash
 sudo apt update
@@ -25,12 +44,23 @@ Make sure to navigate to current working directory.
 cd /your_path/your_project_folder/
 ```
 
-Compile main.tex(main/center latex file) using LuaLaTeX.
+### Generating Pdf Output
+
+Generate pdf output.
 
 ```bash
-latexmk -lualatex main.tex
+make
 ```
 
-> Omitted pdflatex compiling instructions since its obsolette.
+Clean the generated files
 
+```bash
+make clean
+```
+
+Start fresh (Delete generated files including pdf)
+
+```bash
+make purge
+```
 

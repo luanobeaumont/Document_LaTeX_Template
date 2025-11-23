@@ -1,9 +1,11 @@
 content.aux
 main.aux
 main.fdb_latexmk
+main.codeblk
 main.fls
 main.lof
 main.log
 main.lot
 main.out
 main.toc
+_minted/
