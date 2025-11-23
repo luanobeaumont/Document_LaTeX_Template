@@ -11,7 +11,7 @@
 \usepackage{tikz}                   
 \usepackage{xcolor}          
 \usepackage{nicematrix} 
-\usepackage{fancyvrb} % Required for the safe file writing
+\usepackage{fancyvrb} % Required for safe file writing
 
 % --- TCOLORBOX SETUP ---
 \usepackage{tcolorbox}
@@ -88,20 +88,23 @@
   fontupper=\ttfamily
 }
 
-% --- CIA DOSSIER CODE STYLE (UPDATED EXTENSION) ---
+% ==========================================
+%        CIA / DOSSIER STYLE BLOCKS
+% ==========================================
+
+% 1. SOURCE CODE BLOCK (ciacode)
+% Usage: \begin{ciacode}{LANGUAGE}{TITLE} ... \end{ciacode}
 \newenvironment{ciacode}[2]{%
    \def\cialang{#1}%
    \def\ciatitle{#2}%
    \VerbatimEnvironment
-   % CHANGED: Now writes to .codeblk instead of .cia
-   \begin{VerbatimOut}{\jobname.codeblk}%
+   \begin{VerbatimOut}{\jobname.codeblk}% Writes to temp file
 }{%
    \end{VerbatimOut}%
    \tcbinputlisting{
       listing engine=minted,
       listing only,
       minted language=\cialang,
-      % CHANGED: Now reads from .codeblk
       listing file={\jobname.codeblk}, 
       minted options={
           fontsize=\small, 
@@ -131,6 +134,48 @@
    }
 }
 
+% 2. CONSOLE/SYSTEM OUTPUT BLOCK (cblkout)
+% Usage: \begin{cblkout}{TITLE} ... \end{cblkout}
+\newenvironment{cblkout}[1]{%
+   % We use \detokenize to safely handle underscores in the title
+   \def\ciatitle{\detokenize{#1}}% 
+   \VerbatimEnvironment
+   \begin{VerbatimOut}{\jobname.outblk}%
+}{%
+   \end{VerbatimOut}%
+   \tcbinputlisting{
+      listing engine=minted,
+      listing only,
+      minted language=text, 
+      listing file={\jobname.outblk}, 
+      minted options={
+          fontsize=\small, 
+          breaklines, 
+          autogobble,
+          linenos=false,
+      },
+      enhanced,
+      skin=enhancedlast,     
+      arc=1pt,
+      boxrule=0.5pt,
+      colframe=docgray,
+      colback=codebg,
+      width=\linewidth,
+      % Title handling is now safer with \ciatitle defined above
+      title={\small\ttfamily\textbf{SYSTEM} // \textbf{\ciatitle}},
+      coltitle=black,
+      attach boxed title to top left={xshift=3mm, yshift=-3mm},
+      boxed title style={
+          colback=codebg,
+          colframe=docgray,
+          arc=1pt,
+          boxrule=0.5pt,
+          bottom=1mm
+      },
+      drop shadow southeast
+   }
+}
+
 % --- HEADER AND FOOTER ---
 \fancypagestyle{mainpages}{
     \fancyhf{}                      
@@ -139,7 +184,7 @@
     \fancyfoot[R]{\small\thepage}                                    
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
-}
+}tail overview of the figure shown b
 
 % --- TOC/LISTS CUSTOMIZATION ---
 \makeatletter

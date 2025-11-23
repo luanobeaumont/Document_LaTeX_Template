@@ -12,6 +12,8 @@ Only modify the `details.tex` file to modify the document title and its contents
 
 ### Install Minted/Python-pygments
 
+> We will use minted to address tcolorbox issues with codeblocks rendering.
+
 Linux Debian/Ubuntu Install:
 
 ```bash
@@ -26,8 +28,6 @@ pygmentize -V
 ```
 
 ### LuaLaTeX Installation
-
-> We will use minted to address tcolorbox issues with codeblocks rendering.
 
 Installation & Compiling LuaLaTeX compiler:
 
@@ -44,7 +44,9 @@ Make sure to navigate to current working directory.
 cd /your_path/your_project_folder/
 ```
 
-### Generating Pdf Output
+## Generating Pdf Output
+
+### Linux 
 
 Generate pdf output.
 
@@ -52,7 +54,7 @@ Generate pdf output.
 make
 ```
 
-Clean the generated files
+Clean the generated files.
 
 ```bash
 make clean
@@ -64,3 +66,22 @@ Start fresh (Delete generated files including pdf)
 make purge
 ```
 
+### Windows
+
+Generate pdf output.
+
+```shell
+.\build.bat
+```
+
+Clean the generated files.
+
+```shell
+.\build.bat clean
+```
+
+Start fresh (Delete generated files including pdf)
+
+```shell
+.\build.bat purge
+```
