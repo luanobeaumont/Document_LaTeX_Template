@@ -14,8 +14,8 @@
 \usepackage{listings}               
 % REMOVED [table] option to prevent conflict with nicematrix
 \usepackage{xcolor}          
-\usepackage{nicematrix} % <--- ADDED: Fixes table rendering on Linux
-\usepackage{tcolorbox}  % <--- ADDED: Creates rounded inline code
+\usepackage{nicematrix} % <--- Fixes table rendering on Linux
+\usepackage{tcolorbox}  % <--- Creates rounded inline code
 \usepackage{booktabs}               
 \usepackage{subcaption}             
 \usepackage{caption}                
@@ -39,12 +39,13 @@
 % ==========================================
 
 % --- COLOR DEFINITIONS ---
-\definecolor{codebg}{RGB}{200, 220, 255}        
+\definecolor{codebg}{RGB}{250, 245, 230}       % Aged Paper   
 \definecolor{codegreen}{rgb}{0,0.5,0}      
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}   
 \definecolor{framecolor}{rgb}{0.8,0.8,0.8} 
-\definecolor{gray}{rgb}{30, 30, 30} % Dark Gray
-\definecolor{inlinecodebg}{RGB}{200, 220, 255}
+% FIX: Changed rgb to RGB (30 is invalid for lowercase rgb)
+\definecolor{gray}{RGB}{30, 30, 30} 
+\definecolor{inlinecodebg}{RGB}{240, 230, 200} % Darker Manila
 
 % --- INTERACTIVITY (HYPERREF) ---
 \usepackage{hyperref}
@@ -128,41 +129,61 @@
     \renewcommand{\footrulewidth}{0pt}
 }
 
-% --- TABLE OF CONTENTS CUSTOMIZATION ---
+% --- TABLE OF CONTENTS / LISTS CUSTOMIZATION (FIXED) ---
+% 1. Standardize Headers
+\makeatletter
+\renewcommand\tableofcontents{%
+  \section*{\contentsname}
+  \@starttoc{toc}%
+}
+\renewcommand\listoftables{%
+  \section*{\listtablename}
+  \@starttoc{lot}%
+}
+\renewcommand\listoffigures{%
+  \section*{\listfigurename}
+  \@starttoc{lof}%
+}
+\makeatother
+
+% 2. SECTION Styles (TOC)
+% Removed \MakeUppercase to fix the "invisible text" bug
 \titlecontents{section}[2.3em]
-  {}
-  {\bfseries\contentslabel[\thecontentslabel.0]{2em}\MakeUppercase} 
-  {\hspace*{-2.3em}\bfseries\MakeUppercase}
-  {\titlerule*[0.3pc]{.}\contentspage}  
+  {\addvspace{1em}}                   
+  {\bfseries\contentslabel{2em}}      
+  {\hspace*{-2.3em}\bfseries}         
+  {\titlerule*[0.3pc]{.}\contentspage}
 
 \titlecontents{subsection}[4.6em] 
   {}
-  {\bfseries\contentslabel{2em}}
-  {\hspace*{-2.3em}\bfseries}
+  {\contentslabel{2.3em}}
+  {\hspace*{-2.3em}}
   {\titlerule*[0.3pc]{.}\contentspage}
 
 \titlecontents{subsubsection}[6.9em]
   {}
-  {\bfseries\contentslabel{2em}\itshape\space}
-  {\hspace*{-2.3em}\bfseries}
+  {\itshape\contentslabel{3em}}
+  {\hspace*{-3em}}
   {\titlerule*[0.3pc]{.}\contentspage}
 
-\makeatletter
-\renewcommand\tableofcontents{%
-  \section*{\centerline{\MakeUppercase{\contentsname}}
-    \@mkboth
-      {\MakeUppercase\contentsname}
-      {\MakeUppercase\contentsname}
-  }%
-  \@starttoc{toc}%
-}
-\makeatother
+% 3. FIGURE List Styles (LOF)
+\titlecontents{figure}[2.5em]
+  {} 
+  {\contentslabel{2.5em}}             
+  {\hspace*{-2.5em}}
+  {\titlerule*[0.3pc]{.}\contentspage}
+
+% 4. TABLE List Styles (LOT)
+\titlecontents{table}[2.5em]
+  {}
+  {\contentslabel{2.5em}}             
+  {\hspace*{-2.5em}}
+  {\titlerule*[0.3pc]{.}\contentspage}
 
 % --- OVERRIDES ---
 \renewcommand{\lstlistingname}{Code block} 
 \lstset{style=mystyle} 
 
-% Optional: This might still help some viewers, but nicematrix does the heavy lifting now.
 \pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
 
 \begin{document}
@@ -178,7 +199,7 @@
 \fi
 
 \ifShowLOT
-    % Manually add to TOC because \listoftables doesn't do it automatically
+    % Now automatically styled correctly by the customization block above
     \addcontentsline{toc}{section}{Tables}
     \listoftables
     \clearpage

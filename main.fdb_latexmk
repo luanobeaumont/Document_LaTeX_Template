@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1763833505.12918 "main.tex" "main.pdf" "main" 1763833506.37368 0
+["lualatex"] 1763869476.60431 "main.tex" "main.pdf" "main" 1763869477.88141 0
   "/home/wooderson/.texlive2025/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1763832030.75159 127327 1c39dfa079191ba7430719f0296074a7 ""
   "/home/wooderson/.texlive2025/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1763832030.64759 680620 be0284de9da33dbd4b457998c2205bb6 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/helvetic/phvb8r.tfm" 1136768653 4484 b828043cbd581d289d955903c1339981 ""
@@ -259,15 +259,15 @@
   "/usr/local/texlive/2025/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1740687098 13566 16df94dd2de231b2bca0aaa0190941fe ""
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1759400328 5528139 daf1353d2d3d7fed9df2ebbf1b26218e ""
   "/usr/local/texlive/2025/texmf-var/web2c/luahbtex/lualatex.fmt" 1759400378 5630442 0336f524fe5a73608d296cab95640dc6 ""
-  "content.aux" 1763833506.25581 3845 11df9d61e7be7f9e009ac314907ec066 "lualatex"
+  "content.aux" 1763869477.77051 3845 11df9d61e7be7f9e009ac314907ec066 "lualatex"
   "content.tex" 1763832499.78984 3740 ea16533c1ffa23c46da8120b69eafa97 ""
-  "details.tex" 1763802534.38728 1173 d0ac456c18b4524a9784867cb83c290d ""
-  "main.aux" 1763833506.25581 3092 728ece535f7ad0792ad064a1551590ec "lualatex"
-  "main.lof" 1763833506.25981 358 b4517ebb6e500d2b0c9ad6831a2d6586 "lualatex"
-  "main.lot" 1763833506.25981 246 776f531cd2c1388b92daf12ba4c550a7 "lualatex"
-  "main.out" 1763833506.25981 1688 a9e48a2f6fdf3c68a94e023ee0b96bff "lualatex"
-  "main.tex" 1763833502.19583 5748 61dac7db1b6e2a68c795173e30851c49 ""
-  "main.toc" 1763833506.25981 937 78eeaf3c2f41006366ec7ce4e7620a6f "lualatex"
+  "details.tex" 1763869199.44724 1173 d0ac456c18b4524a9784867cb83c290d ""
+  "main.aux" 1763869477.77051 3092 728ece535f7ad0792ad064a1551590ec "lualatex"
+  "main.lof" 1763869477.77051 358 b4517ebb6e500d2b0c9ad6831a2d6586 "lualatex"
+  "main.lot" 1763869477.77051 246 776f531cd2c1388b92daf12ba4c550a7 "lualatex"
+  "main.out" 1763869477.77051 1688 a9e48a2f6fdf3c68a94e023ee0b96bff "lualatex"
+  "main.tex" 1763869319.16691 5764 ea0e36908c860d04c3b496f6c9f5fb1a ""
+  "main.toc" 1763869477.77051 937 78eeaf3c2f41006366ec7ce4e7620a6f "lualatex"
   "titlepage.tex" 1763799143.56883 2420 63fa695c339885289c543c6f039790fe ""
   (generated)
   "content.aux"
