@@ -12,7 +12,10 @@
 \usepackage[a4paper, margin=1in]{geometry}   
 \usepackage{tikz}                   
 \usepackage{listings}               
-\usepackage[table]{xcolor}          
+% REMOVED [table] option to prevent conflict with nicematrix
+\usepackage{xcolor}          
+\usepackage{nicematrix} % <--- ADDED: Fixes table rendering on Linux
+\usepackage{tcolorbox}  % <--- ADDED: Creates rounded inline code
 \usepackage{booktabs}               
 \usepackage{subcaption}             
 \usepackage{caption}                
@@ -24,7 +27,7 @@
 \usepackage{lipsum}                 
 \usepackage{changepage}             
 \usepackage[shortlabels]{enumitem}  
-\usepackage{titletoc}               
+\usepackage{titletoc}  
 \usetikzlibrary{calc}               
 
 \setlength{\parindent}{0pt}         
@@ -36,11 +39,12 @@
 % ==========================================
 
 % --- COLOR DEFINITIONS ---
-\definecolor{codebg}{RGB}{240,240,240}          
+\definecolor{codebg}{RGB}{200, 220, 255}        
 \definecolor{codegreen}{rgb}{0,0.5,0}      
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}   
 \definecolor{framecolor}{rgb}{0.8,0.8,0.8} 
-\definecolor{gray}{RGB}{30, 30, 30} % Dark Gray
+\definecolor{gray}{rgb}{30, 30, 30} % Dark Gray
+\definecolor{inlinecodebg}{RGB}{200, 220, 255}
 
 % --- INTERACTIVITY (HYPERREF) ---
 \usepackage{hyperref}
@@ -99,6 +103,21 @@
     singlelinecheck=false
 }
 
+% --- CUSTOM INLINE COMMAND (CORRECTED) ---
+\newtcbox{\inlinecode}{
+  on line,           % Keeps the box on the same line as text
+  arc=3pt,           % Rounded corners
+  colback=inlinecodebg, 
+  colframe=inlinecodebg, 
+  boxrule=0pt,       % No thick border line
+  boxsep=0pt,        % Minimize internal spacing
+  left=3pt,          % Left padding
+  right=3pt,         % Right padding
+  top=2pt,           % Top padding (prevents text from hitting the ceiling)
+  bottom=1pt,        % Bottom padding
+  fontupper=\ttfamily % Sets the font to typewriter style
+}
+
 % --- HEADER AND FOOTER SETUP ---
 \fancypagestyle{mainpages}{
     \fancyhf{}                      
@@ -142,6 +161,9 @@
 % --- OVERRIDES ---
 \renewcommand{\lstlistingname}{Code block} 
 \lstset{style=mystyle} 
+
+% Optional: This might still help some viewers, but nicematrix does the heavy lifting now.
+\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
 
 \begin{document}
 % 1. Title Page

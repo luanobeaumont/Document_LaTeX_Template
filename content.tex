@@ -52,8 +52,10 @@ LaTeX makes basic text formatting simple:
     \centering
     \caption{Table with alternating row colors (Zebra striping).}
     \label{tab:colored}
-    \rowcolors{2}{white}{codebg} 
-    \begin{tabular}{p{4cm} c c} 
+    
+    % UPDATED: Using NiceTabular to fix Linux rendering artifacts
+    % code-before paints the colors BEFORE text, ensuring they don't hide the content
+    \begin{NiceTabular}{p{4cm} c c}[code-before = \rowcolors{2}{white}{codebg}] 
         \toprule
         \textbf{Employee} & \textbf{ID} & \textbf{Department} \\ 
         \midrule
@@ -62,7 +64,7 @@ LaTeX makes basic text formatting simple:
         Bob Johnson       & 1003        & Design \\
         Alice Williams    & 1004        & Engineering \\
         \bottomrule
-    \end{tabular}
+    \end{NiceTabular}
 \end{table}
 
 \clearpage
@@ -116,3 +118,5 @@ LaTeX makes basic text formatting simple:
   \vspace{1mm} 
   {\footnotesize\textcolor{gray}{\textit{Source: --Source of the Graph--}}}
 \end{figure}
+
+\inlinecode{Inline Test}
