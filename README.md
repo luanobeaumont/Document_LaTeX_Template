@@ -8,6 +8,8 @@ Only modify the `details.tex` file to modify the document title and its contents
 
 ## Dependencies
 
+> We use LuaLaTeX as the main latex compiler to address the color rendering issue persistent in multiple pdf viewers in Windows/Linux. 
+
 ### Linux Debian
 
 Installation & Compiling LuaLaTeX compiler:
@@ -29,25 +31,6 @@ Compile main.tex(main/center latex file) using LuaLaTeX.
 latexmk -lualatex main.tex
 ```
 
-
-## How to compile (Linux)
-
-Prefer use of `pdflatex` since I made this template in the pdflatex environment.
-
-Follow these steps to generate a pdf output:
-
-- Check if on the correct working directory (Where the main.tex files are located).
-
-```bash
-pwd
-```
-*MacOS, Windows, and Linux use the same command*
-
-- Run this pdflatex recipe pdflatex->pdflatex->pdflatex (Run 3 times).
-
-```bash
-pdflatex main.tex
-```
-
+> Omitted pdflatex compiling instructions since its obsolette.
 
 

@@ -1,5 +1,7 @@
 content.aux
 main.aux
+main.fdb_latexmk
+main.fls
 main.lof
 main.log
 main.lot
