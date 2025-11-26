@@ -89,22 +89,22 @@
 }
 
 % ==========================================
-%        CIA / DOSSIER STYLE BLOCKS
+%        CODE / DOSSIER STYLE BLOCKS
 % ==========================================
 
-% 1. SOURCE CODE BLOCK (ciacode)
-% Usage: \begin{ciacode}{LANGUAGE}{TITLE} ... \end{ciacode}
-\newenvironment{ciacode}[2]{%
-   \def\cialang{#1}%
-   \def\ciatitle{#2}%
+% 1. SOURCE CODE BLOCK (codeblock)
+% Usage: \begin{codeblock}{LANGUAGE}{TITLE} ... \end{codeblock}
+\newenvironment{codeblock}[2]{%
+   \def\codelang{#1}
+   \def\codetitle{#2}
    \VerbatimEnvironment
-   \begin{VerbatimOut}{\jobname.codeblk}% Writes to temp file
+   \begin{VerbatimOut}{\jobname.codeblk}%
 }{%
    \end{VerbatimOut}%
    \tcbinputlisting{
       listing engine=minted,
       listing only,
-      minted language=\cialang,
+      minted language=\codelang,
       listing file={\jobname.codeblk}, 
       minted options={
           fontsize=\small, 
@@ -120,7 +120,7 @@
       colframe=docgray,
       colback=codebg,
       width=\linewidth,
-      title={\small\ttfamily\textbf{\cialang} // \textbf{\ciatitle}},
+      title={\small\ttfamily\textbf{\codetitle}},
       coltitle=black,
       attach boxed title to top left={xshift=3mm, yshift=-3mm},
       boxed title style={
@@ -134,11 +134,11 @@
    }
 }
 
-% 2. CONSOLE/SYSTEM OUTPUT BLOCK (cblkout)
-% Usage: \begin{cblkout}{TITLE} ... \end{cblkout}
-\newenvironment{cblkout}[1]{%
+% 2. CONSOLE/SYSTEM OUTPUT BLOCK (codeoutput)
+% Usage: \begin{codeoutput}{TITLE} ... \end{codeoutput}
+\newenvironment{codeoutput}[1]{%
    % We use \detokenize to safely handle underscores in the title
-   \def\ciatitle{\detokenize{#1}}% 
+   \def\codetitle{\detokenize{#1}}
    \VerbatimEnvironment
    \begin{VerbatimOut}{\jobname.outblk}%
 }{%
@@ -161,8 +161,7 @@
       colframe=docgray,
       colback=codebg,
       width=\linewidth,
-      % Title handling is now safer with \ciatitle defined above
-      title={\small\ttfamily\textbf{SYSTEM} // \textbf{\ciatitle}},
+      title={\small\ttfamily\textbf{\codetitle}},
       coltitle=black,
       attach boxed title to top left={xshift=3mm, yshift=-3mm},
       boxed title style={
@@ -184,7 +183,7 @@
     \fancyfoot[R]{\small\thepage}                                    
     \renewcommand{\headrulewidth}{0pt}
     \renewcommand{\footrulewidth}{0pt}
-}tail overview of the figure shown b
+}
 
 % --- TOC/LISTS CUSTOMIZATION ---
 \makeatletter

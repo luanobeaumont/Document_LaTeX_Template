@@ -8,10 +8,12 @@ Only modify the `details.tex` file to modify the document title and its contents
 
 ## Dependencies
 
+> [!NOTE]
 > We use LuaLaTeX as the main latex compiler to address the color rendering issue persistent in multiple pdf viewers in Windows/Linux. 
 
 ### Install Minted/Python-pygments
 
+> [!NOTE]
 > We will use minted to address tcolorbox issues with codeblocks rendering.
 
 Linux Debian/Ubuntu Install:
@@ -43,6 +45,27 @@ Make sure to navigate to current working directory.
 ```bash
 cd /your_path/your_project_folder/
 ```
+
+## Cloning the Document Template
+
+```bash
+git clone https://github.com/luanobeaumont/Document_LaTeX_Template.git 
+```
+
+or 
+
+```bash
+git clone https://github.com/luanobeaumont/Document_LaTeX_Template.git <empty/local/directory>
+```
+
+> [!CAUTION]
+> After cloning, dont forget to delete the .git file embeded to it upon cloning to unlink.
+> This is crucial since not doing so will overwrite the main github repo with personal modifications.
+
+```bash
+rm -rf .git
+```
+
 
 ## Generating Pdf Output
 

@@ -2,175 +2,261 @@
 %              MAIN CONTENT
 % ==========================================
 
-\section{Word-Like Formatting Features}
-
-\subsection{Text Styling}
-LaTeX makes basic text formatting simple:
-\begin{itemize}
-    \item \textbf{This text is Bold} 
-    \item \textit{This text is Italic} 
-    \item \textbf{\textit{This text is Bold and Italic}} 
-    \item \underline{This text is Underlined} 
-\end{itemize}
+\section{Typography and Formatting}
 
 \subsection{Text Sizes}
+The following demonstrates the standard \LaTeX\ font sizing hierarchy:
 \begin{itemize}
-    \item {\tiny This is tiny text} 
-    \item {\scriptsize This is scriptsize text} 
-    \item {\footnotesize This is footnotesize text} 
-    \item {\small This is small text} 
-    \item {\normalsize This is normalsize text (Default)} 
-    \item {\large This is large text} 
-    \item {\Large This is Large text} 
-    \item {\LARGE This is LARGE text} 
-    \item {\huge This is huge text} 
-    \item {\Huge This is Huge text} 
+    \item \tiny{This is tiny text}
+    \item \scriptsize{This is scriptsize text}
+    \item \footnotesize{This is footnotesize text}
+    \item \small{This is small text}
+    \item \normalsize{This is normalsize text (Default)}
+    \item \large{This is large text}
+    \item \Large{This is Large text}
+    \item \LARGE{This is LARGE text}
+    \item \huge{This is huge text}
+    \item \Huge{This is Huge text}
 \end{itemize}
 
-\clearpage
+\subsection{Text Styles}
+Standard formatting options include:
+\begin{itemize}
+    \item \textbf{Bold Text Example}
+    \item \textit{Italicized Text Example}
+    \item \underline{Underlined Text Example}
+    \item \textbf{\textit{Combined Bold and Italic}}
+    \item \texttt{Monospaced/Typewriter Font}
+    \item \textsc{Small Caps Text}
+\end{itemize}
 
-\section{Classified Data Logs}
+\subsection{Enumeration and Lists}
+Using the \inlinecode{enumitem} package, we can customize list markers.
 
-\subsection{Example: C Encryption Routine}
-% 1. The Source Code
-\begin{ciacode}{C}{CONFIDENTIAL: ENCRYPTION PROTOCOL}
-#include <stdio.h>
-#include <string.h>
+% Arabic Numerals
+\paragraph{Arabic Numerals (Default)}
+\begin{enumerate}
+    \item First item (Standard)
+    \item Second item
+    \item Third item
+\end{enumerate}
 
-// TOP SECRET ROUTINE
-int main() {
-    int target_id = 9921;
-    char *status = "CLASSIFIED";
-    
-    // Check clearance level
-    if (target_id > 9000) {
-        printf("[+] Priority Target Identified: %s\n", status);
-        printf("[*] Initializing assets...\n");
-    } else {
-        printf("(!) Access Denied.\n");
-    }
-    return 0;
-}
-\end{ciacode}
+% Roman Numerals
+\paragraph{Roman Numerals}
+\begin{enumerate}[I.]
+    \item Major Point One
+    \item Major Point Two
+    \begin{enumerate}[i.]
+        \item Minor point i
+        \item Minor point ii
+    \end{enumerate}
+\end{enumerate}
 
-% 2. The Output Log (using new cblkout)
-\begin{cblkout}{TERMINAL OUTPUT: RUN_1}
-user@agency-term:~$ gcc encrypt.c -o encrypt
-user@agency-term:~$ ./encrypt
-[+] Priority Target Identified: CLASSIFIED
-[*] Initializing assets...
-user@agency-term:~$ _
-\end{cblkout}
-
-\subsection{Example: R Statistical Analysis}
-% 1. The Source Code
-\begin{ciacode}{R}{ANALYSIS: SUSPECT MOVEMENT DATA}
-# Load the surveillance dataset
-data <- read.csv("suspects.csv")
-
-# Filter for high-risk targets (> 90%)
-targets <- subset(data, risk_level > 0.9)
-
-# Display summary stats
-print(summary(targets$risk_level))
-\end{ciacode}
-
-% 2. The Output Log
-\begin{cblkout}{R CONSOLE EXPORT}
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  0.910   0.925   0.950   0.948   0.980   0.999 
-\end{cblkout}
-
-\vspace{1em}
-This is an example of \inlinecode{inline code} using the same theme.
+% Letters / Alpha
+\paragraph{Alphabetical Lists}
+\begin{enumerate}[A.]
+    \item Section A
+    \item Section B
+    \begin{enumerate}[a)]
+        \item subsection a
+        \item subsection b
+    \end{enumerate}
+\end{enumerate}
 
 \clearpage
 
 \section{Tables}
 
-\subsection{Standard Professional Table}
+\subsection{Standard Professional Table (No Stripes)}
 \begin{table}[ht]
     \centering
-    \caption{A standard academic table.}
-    \label{tab:standard}
+    \caption{A clean academic table using Booktabs.}
+    \label{tab:std_table}
     \begin{tabular}{llr} 
         \toprule
-        \textbf{Item Name} & \textbf{Category} & \textbf{Price (\$)} \\ 
+        \textbf{Component} & \textbf{Material} & \textbf{Cost (\$)} \\ 
         \midrule
-        Apple              & Fruit             & 1.50 \\
-        Sourdough Bread    & Bakery            & 4.00 \\
-        Milk (1 Gallon)    & Dairy             & 3.20 \\
+        Chassis            & Aluminum          & 45.00 \\
+        Microcontroller    & Silicon           & 12.50 \\
+        Power Supply       & Li-Ion            & 22.00 \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-\subsection{Alternating Row Color Table}
+\subsection{Zebra Striped Table}
+This table uses the manila background color defined in the main file.
+
 \begin{table}[ht]
     \centering
-    \caption{Table with alternating row colors (Zebra striping).}
-    \label{tab:colored}
-    
-    \begin{NiceTabular}{p{4cm} c c}
+    \caption{Inventory list with alternating row colors.}
+    \label{tab:zebra_table}
+    \begin{NiceTabular}{l c c}
         \CodeBefore
             \rowcolors{2}{codebg}{white}
         \Body
-            \toprule
-            \textbf{Employee} & \textbf{ID} & \textbf{Department} \\ 
-            \midrule
-            John Doe          & 1001        & Engineering \\
-            Jane Smith        & 1002        & Marketing \\
-            Bob Johnson       & 1003        & Design \\
-            Alice Williams    & 1004        & Engineering \\
-            \bottomrule
+        \toprule
+        \textbf{Item Name} & \textbf{Stock ID} & \textbf{Quantity} \\ 
+        \midrule
+        Network Switch     & NS-001            & 15 \\
+        Patch Cable (5m)   & PC-005            & 120 \\
+        Server Rack        & SR-990            & 4 \\
+        Cooling Unit       & CU-202            & 8 \\
+        UPS Battery        & UP-110            & 20 \\
+        \bottomrule
     \end{NiceTabular}
+\end{table}
+
+\subsection{Full Width Table}
+This table automatically expands to fill the text width between margins.
+
+\begin{table}[ht]
+    \centering
+    \caption{A full-width table utilizing available margin space.}
+    \label{tab:full_width}
+    % Using tabular* with extracolsep fill to push columns apart
+    \setlength{\tabcolsep}{0pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l c r }
+        \toprule
+        \textbf{Project Phase} & \textbf{Status} & \textbf{Completion Date} \\
+        \midrule
+        Phase 1: Planning      & Complete        & Jan 2024 \\
+        Phase 2: Development   & In Progress     & Mar 2024 \\
+        Phase 3: Testing       & Pending         & May 2024 \\
+        Phase 4: Deployment    & Pending         & Jul 2024 \\
+        \bottomrule
+    \end{tabular*}
 \end{table}
 
 \clearpage
 
-\section{Images and Layouts}
+\section{Figures and Images}
 
-\subsection{Standard Image}
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{example-image-a} 
-  \captionsetup{style=mycustom}
-  \caption{Standard single image.}
-  \label{fig:single}
-  \vspace{1mm} 
-  {\footnotesize\textcolor{docgray}{\textit{Source: Generated by LaTeX}}}
-\end{figure}
-
-\subsection{Stacked Images (Subfigures)}
+\subsection{Standard Figure}
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    % Using example-image-a as placeholder
+    \includegraphics[width=0.6\textwidth]{example-image-a}
+    \captionsetup{style=mycustom}
+    \caption{A standard centered figure.}
+    \label{fig:standard}
+    \vspace{1mm}
+    {\footnotesize\textcolor{docgray}{\textit{Source: Generated by LaTeX}}}
+\end{figure}
+
+\subsection{Side-by-Side Figures}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{example-image-b}
-        \caption{Top or Left Image}
-        \label{fig:stack1}
+        \caption{Left Side Data}
+        \label{fig:left}
     \end{subfigure}
-    \hfill 
-    \begin{subfigure}[b]{0.45\textwidth}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{example-image-c}
-        \caption{Bottom or Right Image}
-        \label{fig:stack2}
+        \caption{Right Side Data}
+        \label{fig:right}
     \end{subfigure}
-    \caption{Two images stacked side-by-side.}
-    \label{fig:stacked}
+    \caption{Comparative analysis showing two figures side-by-side.}
+    \label{fig:sidebyside}
 \end{figure}
 
 \subsection{Custom Styled Figure}
+% Specific custom style requested
 \begin{figure}[H]
   \begin{center}
-      \rule{\textwidth}{0.8pt}  
+      \rule{\textwidth}{0.8pt}  % Overbar at top
   \end{center}
-  \captionsetup{style=mycustom} 
+  \captionsetup{style=mycustom}
   \caption{Extended detail overview of the figure shown below...}
-  \label{fig:custom_example}
+  \label{fig:1}
   \begin{center}
+      % Note: Replace example-image with resources/2_bLine_regressplot.png
       \includegraphics[width=0.8\textwidth]{example-image}
   \end{center}
+
   \vspace{1mm} 
-  {\footnotesize\textcolor{docgray}{\textit{Source: --Source of the Graph--}}}
+  {\footnotesize\textcolor{gray}{\textit{Source: --Source of the Graph--}}}
 \end{figure}
+
+\clearpage
+
+\section{Code Implementation}
+
+\subsection{Inline Code}
+You can mention variables or commands directly in the paragraph using \inlinecode{inline code styling}, which highlights the text with the Manila theme.
+
+\subsection{Multi-Language Support}
+
+% 1. C/C++ Example
+\begin{codeblock}{C}{MEMORY ALLOCATION ROUTINE}
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *ptr;
+    int n = 5;
+
+    // Dynamically allocate memory
+    ptr = (int*)malloc(n * sizeof(int));
+
+    if (ptr == NULL) {
+        printf("Memory not allocated.\n");
+        exit(0);
+    }
+    
+    printf("Memory successfully allocated using malloc.\n");
+    free(ptr);
+    return 0;
+}
+\end{codeblock}
+
+\vspace{1em}
+
+% 2. Python Example
+\begin{codeblock}{Python}{DATA PROCESSING SCRIPT}
+import pandas as pd
+import numpy as np
+
+def calculate_metrics(data_frame):
+    # Calculate basic statistics
+    mean_val = np.mean(data_frame['value'])
+    max_val = np.max(data_frame['value'])
+    
+    print(f"Processing Complete.")
+    print(f"Mean: {mean_val:.2f} | Max: {max_val}")
+    return mean_val
+
+# Execute
+df = pd.DataFrame({'value': [10, 20, 30, 40, 50]})
+calculate_metrics(df)
+\end{codeblock}
+
+% 3. R Example
+\begin{codeblock}{R}{STATISTICAL MODELING}
+# Load necessary library
+library(ggplot2)
+
+# Create sample dataset
+data <- data.frame(
+  x = c(1, 2, 3, 4, 5),
+  y = c(2, 4, 6, 8, 10)
+)
+
+# Linear Regression Model
+model <- lm(y ~ x, data = data)
+
+# Output summary
+print(summary(model))
+\end{codeblock}
+
+\subsection{System Output}
+% Code Output Block
+\begin{codeoutput}{TERMINAL OUTPUT}
+user@workstation:~/projects$ gcc main.c -o main
+user@workstation:~/projects$ ./main
+Memory successfully allocated using malloc.
+user@workstation:~/projects$ _
+\end{codeoutput}
